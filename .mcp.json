@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=ysicfjxfctbknrwqgioi&features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching%2Cstorage"
+    },
+    "postgres-supabase": {
+      "type": "stdio",
+      "command": "npx -y @modelcontextprotocol/server-postgres postgresql://postgres.ysicfjxfctbknrwqgioi:Ev-Charging@1007$sB7@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres",
+      "args": [],
+      "env": {}
+    }
+  }
+}
