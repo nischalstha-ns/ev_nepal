@@ -445,7 +445,7 @@ This project was built for Nepal's EV ecosystem development initiative.
 
 ---
 
-### Acknowledgments
+## Acknowledgments
 
 - Built with [Flutter](https://flutter.dev) and [Supabase](https://supabase.com)
 - Map tiles from [OpenStreetMap](https://www.openstreetmap.org)
