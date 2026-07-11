@@ -1,4 +1,4 @@
-# EV Nepal - Electric Vehicle Charging Platform
+## EV Nepal - Electric Vehicle Charging Platform
 
 > **Find. Book. Charge. Swap.**
 
