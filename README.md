@@ -16,7 +16,6 @@ A comprehensive Flutter-based electric vehicle charging management platform buil
 - [Database Schema](#database-schema)
 - [Getting Started](#getting-started)
 - [Role-Based Workflows](#role-based-workflows)
-- [Screenshots & UI](#screenshots--ui)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 
@@ -374,9 +373,7 @@ Role Selection → Admin Analytics → Review Station Applications
 
 ---
 
-## Screenshots & UI
 
-The app uses a custom **Lumina Ecology** design system built on Material 3:
 
 - **Primary Color**: `#006B2C` (Deep Green — representing clean energy)
 - **Surface Colors**: Light blue-tinted whites for depth
