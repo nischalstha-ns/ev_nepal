@@ -1,4 +1,4 @@
-# EV Nepal - Electric Vehicle Charging Platform
+## EV Nepal - Electric Vehicle Charging Platform
 
 > **Find. Book. Charge. Swap.**
 
@@ -425,6 +425,27 @@ Role Selection → Admin Analytics → Review Station Applications
 This project was built for Nepal's EV ecosystem development initiative.
 
 ---
+
+# ⚡ EV Charging App
+
+Download the latest **EV Charging** Android APK and install it on your device.
+
+## 📥 Download APK
+
+**👉 [Click here to Download EV Charging APK](https://drive.usercontent.google.com/download?id=1fCmdfY5UYnmH6LysXnxhjd14mp3zn7vP&export=download)**
+
+---
+
+### Installation
+
+1. Click the download button above.
+2. Wait for the APK to finish downloading.
+3. Open the downloaded APK file.
+4. If prompted, enable **Install from Unknown Sources**.
+5. Complete the installation and launch the app.
+
+> **Note:** This APK is intended for Android devices only.
+
 
 ## Acknowledgments
 
