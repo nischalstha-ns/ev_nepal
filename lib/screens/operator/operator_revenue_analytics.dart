@@ -10,8 +10,7 @@ class OperatorRevenueAnalytics extends StatefulWidget {
 }
 
 class _OperatorRevenueAnalyticsState extends State<OperatorRevenueAnalytics> {
-  String _selectedPeriod = 'Last 30 Days';
-  bool _loading = false;
+  final String _selectedPeriod = 'Last 30 Days';
 
   // Metrics
   final double _totalRevenue = 450230;

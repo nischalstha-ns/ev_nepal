@@ -23,6 +23,7 @@ dependencies:
   url_launcher: ^6.3.0
   cached_network_image: ^3.3.1
   image_picker: ^1.1.2
+  cross_file: ^0.3.5
   fl_chart: ^0.66.0
 
 dev_dependencies:

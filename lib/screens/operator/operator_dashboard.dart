@@ -15,17 +15,16 @@ class _OperatorDashboardState extends State<OperatorDashboard> {
   String get _userId => AuthService.currentUserId ?? '22222222-2222-2222-2222-222222222222';
 
   bool _loading = true;
-  String _operatorName = 'Operator';
 
   // Metrics
-  int _totalStations = 12;
-  int _newStationsThisMonth = 3;
-  int _activeSessions = 45;
-  int _liveLocations = 8;
-  double _revenueToday = 12.5;
-  double _revenueGrowth = 30;
-  double _energyDelivered = 1.2;
-  int _energyPercentage = 75;
+  final int _totalStations = 12;
+  final int _newStationsThisMonth = 3;
+  final int _activeSessions = 45;
+  final int _liveLocations = 8;
+  final double _revenueToday = 12.5;
+  final double _revenueGrowth = 30;
+  final double _energyDelivered = 1.2;
+  final int _energyPercentage = 75;
 
   // Live chargers data
   final List<Map<String, dynamic>> _liveChargers = [
@@ -73,13 +72,9 @@ class _OperatorDashboardState extends State<OperatorDashboard> {
     setState(() => _loading = true);
     try {
       final profile = await ApiService.getUserProfile(_userId);
-      final name = (profile?['full_name'] as String?) ?? 'Operator';
 
       if (mounted) {
-        setState(() {
-          _operatorName = name;
-          _loading = false;
-        });
+        setState(() => _loading = false);
       }
     } catch (_) {
       if (mounted) setState(() => _loading = false);

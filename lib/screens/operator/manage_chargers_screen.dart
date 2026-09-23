@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../models/station_model.dart';
-import '../../services/api_service.dart';
 import '../../theme/app_theme.dart';
 
 class ManageChargersScreen extends StatefulWidget {
@@ -14,15 +12,15 @@ class _ManageChargersScreenState extends State<ManageChargersScreen> {
   bool _loading = true;
   List<Map<String, dynamic>> _chargers = [];
   String _searchQuery = '';
-  String _statusFilter = 'All';
-  String _locationFilter = 'All Stations';
-  String _connectorFilter = 'All';
+  final String _statusFilter = 'All';
+  final String _locationFilter = 'All Stations';
+  final String _connectorFilter = 'All';
 
   // Metrics
-  int _totalChargers = 124;
-  int _onlineChargers = 108;
-  int _maintenanceChargers = 12;
-  int _offlineChargers = 4;
+  final int _totalChargers = 124;
+  final int _onlineChargers = 108;
+  final int _maintenanceChargers = 12;
+  final int _offlineChargers = 4;
 
   // AI Fleet Health
   final List<Map<String, dynamic>> _commonFaults = [

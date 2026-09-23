@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../models/vehicle_model.dart';
 import '../../services/api_service.dart';
 import '../../services/auth_service.dart';
@@ -32,7 +31,7 @@ class _UserProfileScreenDebugState extends State<UserProfileScreenDebug> {
   final _phoneCtrl = TextEditingController();
   final _addressCtrl = TextEditingController();
   final _bioCtrl = TextEditingController();
-  bool _saving = false;
+  final bool _saving = false;
   File? _selectedImage;
 
   @override

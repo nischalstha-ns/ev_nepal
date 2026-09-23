@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../models/station_model.dart';
 import '../../services/api_service.dart';
@@ -23,6 +24,9 @@ class _StationsTabState extends State<StationsTab> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
 
+  // Auto-retry after 30 seconds on failure
+  Timer? _retryTimer;
+
   @override
   void initState() {
     super.initState();
@@ -34,19 +38,39 @@ class _StationsTabState extends State<StationsTab> {
 
   @override
   void dispose() {
+    _retryTimer?.cancel();
     _searchController.dispose();
     _searchFocus.dispose();
     super.dispose();
   }
 
   Future<void> _loadStations() async {
+    _retryTimer?.cancel();
     setState(() { _loading = true; _error = null; });
     try {
       final data = await ApiService.getStations();
-      final stations = data.map((j) => Station.fromJson(j as Map<String, dynamic>)).toList();
-      if (mounted) setState(() { _stations = stations; _loading = false; });
+      if (mounted) setState(() { _stations = data.map((j) => Station.fromJson(j as Map<String, dynamic>)).toList(); _loading = false; });
     } catch (e) {
-      if (mounted) setState(() { _error = e.toString(); _loading = false; });
+      final message = e.toString();
+      String friendlyMessage;
+      if (message.contains('timeout')) {
+        friendlyMessage = 'Request timed out — check your network connection';
+      } else if (message.contains('401') || message.contains('403')) {
+        friendlyMessage = 'Authentication error — please log in again';
+      } else if (message.contains('RLS') || message.contains('permission')) {
+        friendlyMessage = 'Permission denied — contact the developer';
+      } else if (message.contains('network') || message.contains('fetch')) {
+        friendlyMessage = 'Network error — check your internet connection and retry';
+      } else {
+        friendlyMessage = message;
+      }
+      if (mounted) {
+        setState(() { _error = friendlyMessage; _loading = false; });
+        // Auto-schedule retry in 30 seconds
+        _retryTimer = Timer(const Duration(seconds: 30), () {
+          if (mounted && _error != null) _loadStations();
+        });
+      }
     }
   }
 

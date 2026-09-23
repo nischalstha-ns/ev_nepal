@@ -1,17 +1,44 @@
+import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final _db = Supabase.instance.client;
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+/// Retry a Supabase query up to [maxRetries] times with exponential back-off.
+/// Returns null if all attempts fail.
+Future<T?> _retryWithBackoff<T>({
+  required Future<T> Function() fn,
+  int maxRetries = 3,
+  Duration baseDelay = const Duration(milliseconds: 500),
+  Duration timeout = const Duration(seconds: 15),
+}) async {
+  Future<T> attempt(int attempt) async {
+    try {
+      return await Future.value(fn()).timeout(timeout);
+    } catch (e) {
+      if (attempt >= maxRetries - 1) rethrow;
+      await Future.delayed(baseDelay * (1 << attempt));
+      return attempt(attempt + 1);
+    }
+  }
+
+  return await attempt(0);
+}
 
 class ApiService {
   // ── Stations ───────────────────────────────────────────────────────────────
 
   static Future<List<dynamic>> getStations() async {
-    final res = await _db
-        .from('stations')
-        .select('*, chargers(id, status, charger_type, power_kw, price_per_kwh)')
-        .eq('is_approved', true)
-        .order('name');
-    return res as List<dynamic>;
+    final res = await _retryWithBackoff<List<dynamic>>(
+      fn: () => _db
+          .from('stations')
+          .select('*, chargers(id, status, charger_type, power_kw, price_per_kwh)')
+          .eq('is_approved', true)
+          .order('name'),
+      maxRetries: 3,
+    );
+    return res ?? [];
   }
 
   static Future<Map<String, dynamic>> getStation(String id) async {

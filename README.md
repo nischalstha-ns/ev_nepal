@@ -180,14 +180,18 @@ ev_nepal/
 │   │   │   ├── submit_review_screen.dart
 │   │   │   ├── notifications_screen.dart
 │   │   │   ├── user_history_tab.dart
-│   │   │   └── user_profile_screen.dart
+│   │   │   ├── user_profile_screen.dart
+│   │   │   ├── user_profile_screen_debug.dart
+│   │   │   └── user_profile_screen_fixed.dart
 │   │   ├── operator/               # 12+ screens for station operators
 │   │   │   ├── operator_shell.dart
 │   │   │   ├── operator_dashboard.dart
+│   │   │   ├── operator_overview_tab.dart
 │   │   │   ├── live_station_monitor.dart
 │   │   │   ├── smart_queue_screen.dart
 │   │   │   ├── session_management_screen.dart
 │   │   │   ├── manage_chargers_screen.dart
+│   │   │   ├── charger_fleet_tab.dart
 │   │   │   ├── booking_management_screen.dart
 │   │   │   ├── qr_scanner_screen.dart
 │   │   │   ├── operator_revenue_tab.dart
@@ -224,9 +228,10 @@ ev_nepal/
 │       ├── shimmer_card.dart
 │       └── station_card.dart
 ├── supabase/
-│   ├── schema.sql                   # Full database schema (11 tables)
+│   ├── schema.sql                   # Full database schema (12 tables)
 │   ├── seed.sql                     # Demo data for presentations
 │   ├── realtime.sql                 # Enable Realtime publication
+│   ├── fix_rls_policies.sql         # RLS policy fixes for public access
 │   └── demo_reset.sql               # Reset to clean demo state
 ├── assets/
 │   └── images/logo.png
@@ -242,7 +247,7 @@ ev_nepal/
 
 ## Database Schema
 
-The app uses **11 PostgreSQL tables** managed through Supabase:
+The app uses **12 PostgreSQL tables** managed through Supabase:
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -315,9 +320,10 @@ flutter pub get
 # Edit lib/config/supabase_config.dart with your project URL and anon key
 
 # 4. Set up the database (in Supabase SQL Editor, run in order):
-#    - supabase/schema.sql
-#    - supabase/seed.sql
-#    - supabase/realtime.sql
+#    - supabase/schema.sql          # Creates all 12 tables
+#    - supabase/seed.sql            # Populates demo data
+#    - supabase/realtime.sql        # Enables Realtime subscriptions
+#    - supabase/fix_rls_policies.sql # Fixes RLS for public read access
 
 # 5. Run the app
 flutter run
@@ -373,18 +379,6 @@ Role Selection → Admin Analytics → Review Station Applications
 
 ---
 
-
-
-- **Primary Color**: `#006B2C` (Deep Green — representing clean energy)
-- **Surface Colors**: Light blue-tinted whites for depth
-- **Typography**: System font with weighted hierarchy (w400–w800)
-- **Cards**: Zero-elevation with subtle border strokes
-- **Navigation**: Adaptive — bottom bar on mobile, rail on tablet/desktop
-- **Transitions**: Custom fade + slide page transitions (260ms ease-out)
-- **Components**: Glass cards, shimmer loading, charger status chips, progress bars
-
----
-
 ## Roadmap
 
 ### Phase 1 — Authentication & Multi-User
@@ -413,19 +407,6 @@ Role Selection → Admin Analytics → Review Station Applications
 - Predictive demand forecasting
 - Carbon offset tracking
 - Real energy consumption reporting
-
----
-
-## Environment & Platform Support
-
-| Platform | Status |
-|----------|--------|
-| Android | Supported |
-| iOS | Supported |
-| Web | Supported |
-| Windows | Supported |
-| macOS | Supported |
-| Linux | Supported |
 
 ---
 
